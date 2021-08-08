@@ -42,7 +42,7 @@ $ hoststool -u remote_url # 更新时指定 hosts 源
 
 此工作流提供了手动运行 hoststool 的 Alfred 快捷方式。 workflow 使用的 hoststool 独立系统中安装的 hoststool。
 
-下载并双击安装仓库中的 alfred workflow 即可，由于修改 host 需要管理员权限，安装时需要在 `ROOTPASSWORD` 中填入当前用户密码字段。
+下载仓库中的 alfred workflow，双击安装即可。由于修改 host 需要管理员权限，安装时需要在 `ROOTPASSWORD` 中填入当前用户密码字段。
 
 之后在 Alfred 中运行 `hoststool` 即可更新 hosts。
 
