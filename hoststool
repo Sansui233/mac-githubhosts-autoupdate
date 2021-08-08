@@ -1,0 +1,88 @@
+#!/bin/bash
+showHelp() {
+	echo "-u [source_url]	update github hosts. You can specify a custom host source"
+	echo "-b	backup /etc/hosts to /etc/hosts.backup"
+	echo "-r	recover hosts.backup to hosts"
+	echo "-f	list files in /etc which contains \"hosts\""
+}
+
+
+# ====== Main =====
+if [ $# -eq 0 ]; then showHelp;exit 0;fi
+
+# CONF
+download_dir="$HOME/etc/hoststool"
+github_hosts="https://gitee.com/yuchi-shentang/GithubHosts/raw/main/hosts.txt"
+if [ ! -d "$download_dir" ]; then
+  mkdir -p $download_dir
+fi
+
+case "$1" in
+	-f)
+		ls /etc | grep hosts;
+		exit 0;;
+	-b) 
+		sudo cp /etc/hosts /etc/hosts.backup;
+		exit 0;;
+	-r) 
+		sudo cp /etc/hosts.backup /etc/hosts;
+		exit 0;;
+	-u) 
+		if [ $2 ]; then github_hosts=$2;fi
+		curl -o ${download_dir}/hosts ${github_hosts};
+		if [ $? -ne 0 ]; then
+			echo "[ERROR] 获取远程 host 出错，请尝试更换 source 或检查 download_dir 读写权限"
+			osascript -e 'display notification "获取远程 host 出错，请尝试更换 source" with title "hoststool"'
+			exit 1
+		fi
+		
+		# Validate host content length
+		lines=$(awk '{print NR}' ${download_dir}/hosts | tail -n1)
+		if [ $lines -lt 10 ]
+		then
+			echo '[ERRO] 远程 Github Hosts 无效（Gitee源不稳定），通常重试即可'
+			osascript -e 'display notification "远程 Github Hosts 无效（Gitee源不稳定），通常重试即可" with title "hoststool"'
+			rm ${download_dir}/hosts
+			exit 1
+		fi
+
+		# Remove old content
+		begin=$(sed -n  '/# ==== Github Start ====/=' /etc/hosts | awk 'NR==1{print}')
+		end=$(sed -n  '/# ==== Github End ====/=' /etc/hosts | awk 'END{print}')
+		echo "Removing old hosts. Start at line \"${begin}\", End at line \"${end}\""
+		cat /etc/hosts | sed "${begin},${end}d" > ${download_dir}/hosts.tmp
+		if [ $? -ne 0 ]; then
+			## Trip Failed
+			echo "[INFO] 当前 Host中 无旧的 Github Host 标记可清除"
+		else
+			## Trip Succeed, move result
+			echo "[INFO] 清除旧的 Github Host 标记"
+			sudo cp /etc/hosts /etc/hosts.backup && sudo cp ${download_dir}/hosts.tmp /etc/hosts;
+		fi
+
+		# Add new hosts
+		sudo bash -c "echo '# ==== Github Start ====' >> /etc/hosts" # Add github host
+		if [ $? -ne 0 ]; then
+			echo "[ERROR] 无root权限，请尝试运行脚本手动输入密码"
+			osascript -e 'display notification "无root权限，请尝试运行脚本手动输入密码" with title "hoststool"'
+			rm ${download_dir}/hosts.tmp
+			rm ${download_dir}/hosts
+			exit 1;
+		fi
+		sudo bash -c "echo \"# Updated at $(date)\" >> /etc/hosts" # Add github host
+		sudo bash -c "cat ${download_dir}/hosts >> /etc/hosts";
+		sudo bash -c "echo '# ==== Github End ====' >> /etc/hosts"
+		rm ${download_dir}/hosts.tmp
+		rm ${download_dir}/hosts
+
+		echo "[INFO] Github Hosts 块更新于 $(date)"
+		osascript -e 'display notification "Github Hosts 已更新" with title "hoststool"'
+		exit 0;;
+	-h|--help)
+		showHelp;
+		exit 0;;
+	*)
+		echo "Unknown command";
+		showHelp;
+		exit 1;;
+esac
