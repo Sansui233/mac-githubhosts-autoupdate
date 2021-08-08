@@ -20,7 +20,7 @@ $ sudo ./install.sh
 
 ```shell
 $ sudo launchctl list | grep hoststool
-# 正常情况下的输出为。- 表示当前为运行，0 表示上次运行的状态正常。
+# 正常情况下的输出为。- 表示当前未运行，0 表示上次运行的状态正常。
 -	0	hoststool 
 ```
 
