@@ -46,6 +46,16 @@ $ hoststool -u remote_url # 更新时指定 hosts 源
 
 之后在 Alfred 中运行 `hoststool` 即可更新 hosts。
 
+## Log 中常见错误
+
+- [ERROR] 获取远程 host 出错，请尝试更换 source 或检查 download_dir 读写权限
+
+  此情况会在开机后第一次运行出现，因为开机时无网络连接，为正常报错。若有网络的情况下出现此信息，请按信息内容排查。
+
+- [ERRO] 远程 Github Hosts 无效（Gitee源不稳定），通常重试即可
+
+  此情况发生于获取到了远程文件，但文件内容无效（文件违规被屏蔽）。偶尔出现。如非常介意建议更换 hosts 文件中的 Host 源后重新安装此工具。
+
 ## 卸载
 
 ```shell
