@@ -1,6 +1,6 @@
 # Github Hosts Autoupdate for mac
 
-此轻量级小工具将在 mac 上自动定时更新 github hosts
+此轻量级小工具将在 mac 上自动定时更新 github hosts。
 
 - 默认情况下每小时更新一次。如需更改间隔请修改 hoststool.plist 文件中的`StartInterval`。
 - 使用的 host 源为 [JohyC/GithubHosts](https://github.com/JohyC/GithubHosts) 项目的 Gitee 源。如需更换默认源请在可修改 `hoststool` 里的 `github_hosts` 变量，或在[手动运行](#使用)时指定url。
@@ -21,7 +21,7 @@ $ sudo ./install.sh
 
 ```shell
 $ sudo launchctl list | grep hoststool
-# 正常情况下的输出为。- 表示当前未运行，0 表示上次运行的状态正常。
+# 正常情况的输出如下。- 表示当前未运行，0 表示上次运行的状态正常。
 -	0	hoststool 
 ```
 
@@ -41,7 +41,7 @@ $ hoststool -u remote_url # 更新时指定 hosts 源
 
 ## Alfred Workflow
 
-此工作流提供了手动运行 hoststool 的 Alfred 快捷方式。 workflow 使用的 hoststool 独立系统中安装的 hoststool。
+此工作流提供了手动运行 hoststool 的 Alfred 快捷方式。 workflow 使用的 hoststool 独立于系统中安装的 hoststool。
 
 下载仓库中的 alfred workflow，双击安装即可。由于修改 host 需要管理员权限，安装时需要在 `ROOTPASSWORD` 中填入当前用户密码字段。
 
@@ -53,9 +53,9 @@ $ hoststool -u remote_url # 更新时指定 hosts 源
 
   此情况会在开机后第一次运行出现，因为开机时无网络连接，为正常报错。若有网络的情况下出现此信息，请按信息内容排查。
 
-- [ERRO] 远程 Github Hosts 无效（Gitee源不稳定），通常重试即可
+- [ERROR] 远程 Github Hosts 无效（Gitee源不稳定），通常重试即可
 
-  此情况发生于获取到了远程文件，但文件内容无效（文件违规被屏蔽）。偶尔出现。如非常介意建议更换 hosts 文件中的 Host 源后重新安装此工具。
+  此情况发生于获取到了远程文件，但文件内容无效（文件违规被屏蔽）。 这个情况偶尔出现。如非常介意建议更换 hoststool 文件中的 host 源后重新安装此工具。
 
 ## 卸载
 
