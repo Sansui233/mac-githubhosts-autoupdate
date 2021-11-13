@@ -2,7 +2,7 @@
 
 此轻量级小工具将在 mac 上自动定时更新 github hosts
 
-- 默认情况下每小时更新一次。如需更改间隔请修改 githubhosts.plist 文件中的`StartInterval`。
+- 默认情况下每小时更新一次。如需更改间隔请修改 hoststool.plist 文件中的`StartInterval`。
 - 使用的 host 源为 [JohyC/GithubHosts](https://github.com/JohyC/GithubHosts) 项目的 Gitee 源。如需更换默认源请在可修改 `hoststool` 里的 `github_hosts` 变量，或在[手动运行](#使用)时指定url。
 
 ## 安装
