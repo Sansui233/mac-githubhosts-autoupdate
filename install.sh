@@ -21,7 +21,7 @@ echo "[INFO] Installing(1/3) Copy hoststool to /usr/local/bin"
 sudo cp ./hoststool /usr/local/bin/
 echo "[INFO] Installing(2/3) Add hoststool.plist to /Library/LaunchDaemons"
 sudo cp ./hoststool.plist /Library/LaunchDaemons/
-sudo chown root:admin /Library/LaunchDaemons/hoststool.
+sudo chown root:admin /Library/LaunchDaemons/hoststool.plist
 echo "[INFO] Installing(3/3) Load launch daemon"
 if [ ! -d "/etc/hoststool" ]; then
     sudo mkdir -p "/etc/hoststool"
