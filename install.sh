@@ -21,11 +21,8 @@ echo "[INFO] Installing(1/3) Copy hoststool to /usr/local/bin"
 sudo cp ./hoststool /usr/local/bin/
 echo "[INFO] Installing(2/3) Add hoststool.plist to /Library/LaunchDaemons"
 sudo cp ./hoststool.plist /Library/LaunchDaemons/
-sudo chown root:admin /Library/LaunchDaemons/hoststool.
+sudo chown root:admin /Library/LaunchDaemons/hoststool.plist
 echo "[INFO] Installing(3/3) Load launch daemon"
-if [ ! -d "/etc/hoststool" ]; then
-    sudo mkdir -p "/etc/hoststool"
-fi
 sudo launchctl load -w /Library/LaunchDaemons/hoststool.plist
 
 read -p "[INFO] This launch daemon has run once. Show log file? 定时任务已运行一次，是否查看运行日志？(y/n)(Default:y): " flag

@@ -3,7 +3,7 @@
 此轻量级小工具将在 mac 上自动定时更新 github hosts
 
 - 默认情况下每小时更新一次。如需更改间隔请修改 githubhosts.plist 文件中的`StartInterval`。
-- 使用的 host 源为 [JohyC/GithubHosts](https://github.com/JohyC/GithubHosts) 项目的 Gitee 源。如需更换默认源请在可修改 `hoststool` 里的 `github_hosts` 变量，或在[手动运行](#使用)时指定url。
+- 使用的 hosts 源为 [JohyC/GithubHosts](https://github.com/JohyC/GithubHosts) 项目的 Github 源，可能偶尔无法连接。如需要更换 hosts 源请在可修改 `hoststool` 里的 `source` 变量，或在[手动运行](#使用)时指定url。
 
 ## 安装
 
@@ -52,9 +52,9 @@ $ hoststool -u remote_url # 更新时指定 hosts 源
 
   此情况会在开机后第一次运行出现，因为开机时无网络连接，为正常报错。若有网络的情况下出现此信息，请按信息内容排查。
 
-- [ERRO] 远程 Github Hosts 无效（Gitee源不稳定），通常重试即可
+- [ERROR] source无效，请更换为可用hosts源
 
-  此情况发生于获取到了远程文件，但文件内容无效（文件违规被屏蔽）。偶尔出现。如非常介意建议更换 hoststool 文件中的 Host 源后重新安装此工具。
+  此情况发生于获取到了远程文件，但文件内容可能被屏蔽，在Gitee上的托管的文件偶尔出现此类情况，建议更换 hoststool 文件中的 source 后重新安装此工具。
 
 ## 卸载
 
