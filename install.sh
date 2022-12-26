@@ -3,7 +3,6 @@
 if [ ! -d "/usr/local/bin" ]; then
     mkdir -p /usr/local/bin
 fi
-./
 read -p "[INFO] Test before installing? 安装前是否测试脚本？(y/n)(Default:y): " flag
 case $flag in
     "n")
