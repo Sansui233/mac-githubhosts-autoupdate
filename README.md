@@ -3,7 +3,7 @@
 此轻量级小工具将在 mac 上自动定时更新 github hosts
 
 - 默认情况下每小时更新一次。如需更改间隔请修改 hoststool.plist 文件中的`StartInterval`。
-- 使用的 hosts 源为 [JohyC/GithubHosts](https://github.com/JohyC/GithubHosts) 项目的 Github 源，可能偶尔无法连接。如需要更换 hosts 源请在可修改 `hoststool` 里的 `source` 变量，或在[手动运行](#使用)时指定url。
+- 使用的 hosts 源为 [JohyC/GithubHosts](https://github.com/JohyC/GithubHosts) 项目的 Github 源，可能偶尔无法连接。如需更换 hosts 源，请修改 `hoststool` 里的 `source` 变量，或在[手动运行](#使用)时指定url。
 
 ## 安装
 
@@ -41,7 +41,7 @@ $ hoststool -rm # 清除 Github hosts
 
 ## Alfred Workflow
 
-此工作流提供了手动运行 hoststool 的 Alfred 快捷方式。 workflow 使用的 hoststool 独立系统中安装的 hoststool。
+此工作流提供了手动运行 hoststool 的 Alfred 快捷方式。 workflow 使用的 hoststool 独立于系统中安装的 hoststool。
 
 下载仓库中的 alfred workflow，双击安装即可。由于修改 host 需要管理员权限，安装时需要在 `ROOTPASSWORD` 中填入当前用户密码字段。
 
